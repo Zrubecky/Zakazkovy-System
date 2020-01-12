@@ -16,11 +16,11 @@
 <body>
 	<!-- Navbar -->
 	<nav class="main-navigation navbar sticky-top navbar-dark navbar-expand-lg navbar-primary bg-primary border-bottom">
-		<a class="navbar-brand" n:href="Homepage:">Beneš & Michl - Zakázkový Systém</a>
+		<a class="navbar-brand wrap" n:href="Homepage:">Beneš & Michl - Zakázkový Systém</a>
 
 		<button n:if="$user->loggedIn" class="btn btn-light" id="menu-toggle">Menu</button>
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<button n:if="$user->loggedIn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 

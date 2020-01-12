@@ -2,6 +2,10 @@ body {
    overflow-x: hidden;
  }
 
+.wrap {
+  white-space: normal;
+}
+
 #wrapper {
   overflow-x: hidden;
 }
