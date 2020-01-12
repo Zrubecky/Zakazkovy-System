@@ -40,3 +40,13 @@ body {
 #wrapper.toggled #sidebar-wrapper {
   margin-left: -15rem;
 }
+
+@media only screen and (max-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+}
