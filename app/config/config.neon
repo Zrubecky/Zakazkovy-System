@@ -1,0 +1,63 @@
+parameters:
+	attachmentsDir: %wwwDir%/attachments/
+
+	mailer:
+		smtp: true
+		host: 
+		port: 465
+		username: 
+		password: 
+		secure: ssl
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+database:
+	dsn: 'mysql:host=localhost;dbname=bm_zakazkovy_system'
+	user: root
+	password: 
+
+mail:
+	smtp: %mailer.smtp%
+	host: %mailer.host%
+	port: %mailer.port%
+	username: %mailer.username%
+	password: %mailer.password%
+	secure: %mailer.secure%
+
+session:
+	expiration: 14 days
+
+services:
+	authenticator: App\Model\UserAuthenticator
+	router: App\Router\RouterFactory::createRouter
+
+	- Nette\Utils\Random
+	- Nette\Utils\DateTime
+	- Latte\Engine
+	
+	- App\Model\UserRegistrator
+	- App\Model\UserPasswordChanger
+	- App\Model\PasswordVerificationException
+	- App\Model\TokenVerificationException
+	- App\Model\UserPasswordReseter
+	- App\Model\ResetTokenGenerator
+	- App\Model\PasswordResetRequestGenerator
+	- App\Model\ResetTokenValidator
+	- App\Model\RegisteredUserDao
+	- App\Model\ResetTokenDao
+	- App\Model\ConfirmationTokenDao
+	- App\Model\ConfirmationTokenGenerator
+	- App\Model\ConfirmationTokenValidator
+	- App\Model\OrderTypeDao
+	- App\Model\OrderDao
+	- App\Model\AttachmentDao
+	- App\Model\OrderValidator
+	- App\Model\AttachmentStorage(%attachmentsDir%)
+
+	- App\Model\BaseMailer(homeAddress: %mailer.username%)
+	- App\Model\OrderMailer(homeAddress: %mailer.username%)
+	- App\Model\PasswordResetMailer(homeAddress: %mailer.username%)
+	- App\Model\ConfirmEmailMailer(homeAddress: %mailer.username%)

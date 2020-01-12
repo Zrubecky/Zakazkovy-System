@@ -1,0 +1,41 @@
+{block content}
+
+   <div class="container-fluid">
+      
+      <div class="row">
+         <div class="col-xs-12 col-sm-10 col-md-8 col-lg-3 mx-auto">
+            
+            <form n:name=signInForm class="text-center border border-light p-xs-2 p-sm-5">
+               <h2 n:block="title" class="mb-4">Přihlášení</h2>
+               
+               <div class="form-group">
+                  <input n:name=email class="form-control">
+               </div>
+
+               <div class="form-group">
+                  <input n:name=password class="form-control">
+               </div>
+
+               <div class="alert alert-danger text-left" n:if="$form->hasErrors()">
+                  <span n:foreach="$form->errors as $error">{$error}</span>
+               </div>
+
+               <div class="form-group">
+                  <input n:name=send class="btn btn-primary btn-block">
+               </div>
+
+               <p class="text-left">
+                  <a n:href="Registration:register">Registrovat</a>
+               </p>
+               <p class="text-left">
+                  <a n:href="ResetPasswordRequest:request">Zapomněli jste heslo?</a>
+               </p>
+               
+            </form>  
+
+         </div>
+      </div>
+
+   </div>
+
+{/block}

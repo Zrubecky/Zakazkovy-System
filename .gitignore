@@ -1,0 +1,6 @@
+app/config/config.local.neon
+/www/attachments/*
+/log/*
+!/log/.htaccess
+/temp/*
+!/temp/.htaccess

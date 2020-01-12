@@ -1,0 +1,98 @@
+{block links}
+   {include #parent}
+	<link rel="stylesheet" href="{$basePath}/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" href="{$basePath}/fileinput/css/fileinput.min.css">
+	<link rel="stylesheet" href="{$basePath}/fileinput/themes/explorer-fas/theme.min.css">
+{/block}
+
+{block content}
+   <div class="row">
+      <div class="col-lg-6 mx-lg-auto">
+         <form n:name=placeOrderForm>
+            <h2 n:block="title" class="mb-4">Zadat zakázku</h2>
+
+            <p class="lead">Pro zadání zakázky prosím vyplňte následující formulář:</p>
+            
+            <div class="form-group">
+               <label for="email">Email</label>
+               <input n:name=email class="form-control">
+            </div>
+
+            <div class="form-group">
+               <label for="name">Název zakázky</label>
+               <input n:name=name class="form-control">
+            </div>
+
+            <div class="form-group">
+               <label for="type_id">Typ zakázky</label>
+               <select id="type_id" n:name=type_id class="form-control"></select>
+            </div>
+
+            <div class="form-group">
+               <label for="date">Termín</label>
+               <input n:name="date" type="text" class="form-control datepicker">
+            </div>
+
+            <div class="form-group">
+               <label for="description">Popis</label>
+               <textarea id="description" n:name=description  class="form-control" rows="15"></textarea>
+            </div>
+
+            <div class="form-group">
+               <input n:name="attachments" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-browse-on-zone-click="true">
+            </div>
+            
+            <div class="alert alert-danger text-left" n:if="$form->hasErrors()">
+               <span n:foreach="$form->errors as $error">{$error}</span>
+            </div>
+
+            <div class="form-group">
+               <input n:name=send class="btn btn-primary btn-block">
+            </div>
+            
+         </form>  
+      </div>
+   </div>
+
+{/block}
+
+{block scripts}
+   {include #parent}
+   <script src="{$basePath}/js/bootstrap-datepicker.min.js"></script>
+   <script src="{$basePath}/js/bootstrap-datepicker.cs.min.js"></script>
+   <script src="{$basePath}/fileinput/js/fileinput.min.js"></script>
+   <script src="{$basePath}/fileinput/js/locales/cs.js"></script>
+   <script src="{$basePath}/fileinput/themes/explorer-fas/theme.min.js"></script>
+
+   <script>
+      let orderTemplateUpdater = {
+         orderType: $("#type_id"),
+         orderDescription: $("#description"),
+
+         updateOrder: function(typeId) {
+            let updater = this;
+
+            $.getJSON({link updateOrder!}, {{$orderTypeParamId}: typeId}).done(function(data) {
+               if (data.orderTemplate !== null) {
+                  updater.orderDescription.html(data.orderTemplate);
+               }
+            })
+         },
+
+         bindUI: function() {
+            let updater = this;
+
+            this.orderType.change(function() {
+               let typeId = updater.orderType.val();
+               updater.updateOrder(typeId);
+            });
+         }
+      }
+   </script>
+   
+   <script>
+      datePickerFactory.create($(".datepicker"));
+      fileInputFactory.create($(".file"));
+      orderTemplateUpdater.bindUI();
+   </script>
+{/block}
