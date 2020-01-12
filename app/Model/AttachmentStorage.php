@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Nette;
 use Nette\Http\FileUpload;
+use Nette\Utils\FileSystem;
 use Nette\Utils\Random;
 use App\Model\AttachmentDao;
 
@@ -24,6 +25,17 @@ class AttachmentStorage {
    {
       $this->dir = $dir;
       $this->attachmentDao = $attachmentDao;
+   }
+
+   
+   /**
+    * Creates attachments directory if it does not exist.
+    *
+    * @return void
+    */
+   public function createAttachmentsDir(): void
+   {
+      FileSystem::createDir($this->dir);
    }
 
 
@@ -59,6 +71,8 @@ class AttachmentStorage {
     */
    public function save(FileUpload $file, int $orderId)
    {
+      $this->createAttachmentsDir();
+
       if ($file->isOk()) {
          $newName = $this->getNewName();
          $path = $this->dir . $newName;
