@@ -91,6 +91,8 @@ class AttachmentStorage {
             "attachment_path" => $path
          ]);
          
+      } else {
+         return false;
       }
 
       return $attachment;
