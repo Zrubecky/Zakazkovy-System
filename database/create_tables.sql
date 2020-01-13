@@ -5,7 +5,9 @@ CREATE TABLE `users` (
   `surname` varchar(255) NOT NULL,
   `company` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `account_status` varchar(255) NOT NULL DEFAULT "P"
+  `account_status` varchar(255) NOT NULL DEFAULT "P",
+
+  CONSTRAINT email_unique UNIQUE (`email`)
 ) ENGINE=InnoDB CHARSET=utf8;
 
 CREATE TABLE `reset_tokens` (
@@ -13,7 +15,9 @@ CREATE TABLE `reset_tokens` (
    `user_id` int(11) NOT NULL,
    `token` varchar(255) NOT NULL,
    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+
+  CONSTRAINT token_unique UNIQUE (`token`)
 ) ENGINE=InnoDB CHARSET=utf8;
 
 CREATE TABLE `confirmation_tokens` (
@@ -21,13 +25,17 @@ CREATE TABLE `confirmation_tokens` (
    `user_id` int(11) NOT NULL,
    `token` varchar(255) NOT NULL,
    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+   FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+
+   CONSTRAINT token_unique UNIQUE (`token`)
 ) ENGINE=InnoDB CHARSET=utf8;
 
 CREATE TABLE `order_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `type` varchar(255) NOT NULL,
-  `template` text
+  `template` text,
+
+  CONSTRAINT type_unique UNIQUE (`type`)
 ) ENGINE=InnoDB CHARSET=utf8;
 
 CREATE TABLE `orders` (
