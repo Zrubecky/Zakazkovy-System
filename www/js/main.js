@@ -20,6 +20,7 @@ var fileInputFactory = {
    create: function(handler) {
       handler.fileinput({
          theme: "explorer-fas",
+         uploadAsync: false,
          autoOrientImage: false,
          language: "cs",
          hideThumbnailContent: true
