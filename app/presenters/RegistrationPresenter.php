@@ -35,6 +35,15 @@ class RegistrationPresenter extends Nette\Application\UI\Presenter
       $this->confirmEmailMailer = $confirmEmailMailer;
    }
 
+   public function startup(): void 
+   {
+      parent::startup();
+
+      if ($this->getUser()->isLoggedIn()) {
+         $this->redirect("Homepage:");
+      }
+   }
+
 
    /**
     * Registration form factory.
