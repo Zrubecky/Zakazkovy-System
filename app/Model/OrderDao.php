@@ -44,4 +44,19 @@ class OrderDao
       return ! empty($order) ? $order : null;
    }
 
+   /**
+    * Returns orders for user based on id.
+    *
+    * @return array
+    */
+   public function getOrders(int $userId)
+   {
+      $orders = $this->database->table(self::ORDERS_TABLE)
+      ->where("user_id = ?", $userId)
+      ->order("created_at")
+      ->fetchAll();
+
+      return $orders;
+   }
+
 }

@@ -1,6 +1,28 @@
 {block content}
    <h2 n:block="title" class="mb-4">Přehled zakázek</h2>
 
-   <p class="lead">Přehled vytvořených zakázek přihlášeným uživatelem.</p>
+   {if $orders}
+      <div n:ifcontent n:foreach="$orders as $order" class="card mb-4">
+         <div class="card-header">
+            Vytvořeno: {$order->created_at|date:'%d.%m.%Y'}
+         </div>
+
+         <div class="card-body">
+            <h3 class="card-title">{$order->name}</h3>
+
+            <h5>Typ:</h5>
+            <p class="card-text lead">{$order->ref("order_types","type_id")->type}</p>
+            
+            <h5>Termín:</h5>
+            <p class="card-text lead">{$order->date|date:'%d.%m.%Y'}</p>
+
+            <h5>Popis:</h5>
+            <p class="card-text lead">{($order->description)|breaklines}</p>
+         </div>
+
+      </div>
+   {else}
+      <p class="lead">Zatím nemáte žádné poptávky.</p>
+   {/if}
 
 {/block}
