@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
@@ -31,10 +33,6 @@ class ConfirmationTokenValidator {
    {
       $tokenRow = $this->confirmationTokenDao->findByToken($resetToken);
 
-      if ( ! $tokenRow) {
-         return false;
-      } else {
-         return true;
-      }
+      return ! empty($tokenRow) ? true : false;
    }
 }

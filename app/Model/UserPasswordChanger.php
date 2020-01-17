@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
@@ -33,7 +35,7 @@ class UserPasswordChanger {
     * @param integer $userId
     * @param string $currentPassword
     * @param string $newPassword
-    * @return boolean
+    * @return bool
     * @throws App\Model\PasswordVerificationException when current password does not match the user password.
     */
    public function changePassword(int $userId, string $currentPassword, string $newPassword): bool
@@ -46,11 +48,7 @@ class UserPasswordChanger {
 
       $updated = $this->RegisteredUserDao->updatePassword($userId, $this->passwords->hash($newPassword));
       
-      if ($updated > 0) {
-         return true;
-      } else {
-         return false;
-      }
+      return $updated > 0 ? true : false;
    }
 
    

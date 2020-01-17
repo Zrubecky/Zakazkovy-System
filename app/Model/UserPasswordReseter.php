@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
@@ -31,16 +33,12 @@ class UserPasswordReseter {
     *
     * @param integer $userId
     * @param string $newPassword
-    * @return boolean
+    * @return bool
     */
    public function resetPassword(int $userId, string $newPassword): bool
    {
       $updated = $this->registeredUserDao->updatePassword($userId, $this->passwords->hash($newPassword));
 
-      if ($updated > 0) {
-         return true;
-      } else {
-         return false;
-      }
+      return $updated > 0 ? true : false;
    }
 }

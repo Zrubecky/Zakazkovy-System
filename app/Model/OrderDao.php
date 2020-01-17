@@ -1,9 +1,12 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
 use Nette\Database\Context;
+use Nette\database\Table\ActiveRow;
 
 /**
  * Data access object for orders.
@@ -32,13 +35,13 @@ class OrderDao
     * Inserts new order into the database.
     *
     * @param array $orderData [$column => $value].
-    * @return ActiveRow
+    * @return ActiveRow|null
     */
-   public function addOrder(array $orderData)
+   public function addOrder(array $orderData): ?ActiveRow
    {
       $order = $this->database->table(self::ORDERS_TABLE)->insert($orderData);
 
-      return $order;
+      return ! empty($order) ? $order : null;
    }
 
 }

@@ -1,9 +1,12 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
 use Nette\Database\Context;
+use Nette\Database\Table\ActiveRow;
 
 /**
  * Data access object to registered users.
@@ -27,9 +30,9 @@ class RegisteredUserDao {
     * Returns user by its id.
     *
     * @param integer $userId
-    * @return ActiveRow|bool
+    * @return ActiveRow|null
     */
-   public function findbyId(int $userId)
+   public function findbyId(int $userId): ?ActiveRow
    {
       return $this->database->table(self::USERS_TABLE)->get($userId);
    }
@@ -39,9 +42,9 @@ class RegisteredUserDao {
     * Returns user by its email.
     *
     * @param string $email
-    * @return ActiveRow|bool
+    * @return ActiveRow|null
     */
-   public function findByEmail(string $email)
+   public function findByEmail(string $email): ?ActiveRow
    {
       return $this->database->table(self::USERS_TABLE)->where("email", $email)->fetch();
    }
@@ -51,9 +54,9 @@ class RegisteredUserDao {
     * Returns user by its reset token.
     *
     * @param string $resetToken
-    * @return ActiveRow|bool
+    * @return ActiveRow|null
     */
-   public function findByResetToken(string $resetToken)
+   public function findByResetToken(string $resetToken): ?ActiveRow
    {
       $user = $this->database->table(self::USERS_TABLE)
          ->where(":reset_tokens(user).token LIKE ?", $resetToken)
@@ -67,9 +70,9 @@ class RegisteredUserDao {
     * Returns user by its email confirmation token.
     *
     * @param string $confirmationToken
-    * @return ActiveRow|bool
+    * @return ActiveRow|null
     */
-   public function findByConfirmationToken(string $confirmationToken)
+   public function findByConfirmationToken(string $confirmationToken): ?ActiveRow
    {
       $user = $this->database->table($this::USERS_TABLE)
          ->where(":confirmation_tokens(user).token LIKE ?", $confirmationToken)

@@ -1,11 +1,15 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
+
 
 use Nette;
 use Nette\Http\FileUpload;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Random;
+use Nette\Database\Table\ActiveRow;
 use App\Model\AttachmentDao;
 
 /**
@@ -67,35 +71,33 @@ class AttachmentStorage {
     *
     * @param FileUpload $file
     * @param integer $orderId
-    * @return ActiveRow|bool
+    * @return ActiveRow|null
     */
-   public function save(FileUpload $file, int $orderId)
+   public function save(FileUpload $file, int $orderId): ?ActiveRow
    {
       $this->createAttachmentsDir();
 
-      if ($file->isOk()) {
-         $newName = $this->getNewName();
-         $path = $this->dir . $newName;
-
-         try {
-            $file->move($path);
-
-         } catch(Nette\InvalidStateException $e) {
-            return false;
-         }
-
-         $attachment = $this->attachmentDao->save([
-            "name" => $file->getName(),
-            "order_id" => $orderId,
-            "extension" => $this->getExtension($file),
-            "attachment_path" => $path
-         ]);
-         
-      } else {
-         return false;
+      if ( ! $file->isOk()) {
+         return null;
       }
 
-      return $attachment;
+      $newName = $this->getNewName();
+      $path = $this->dir . $newName;
+
+      try {
+         $file->move($path);
+      } catch(Nette\InvalidStateException $e) {
+         return null;
+      }
+
+      $attachment = $this->attachmentDao->save([
+         "name" => $file->getName(),
+         "order_id" => $orderId,
+         "extension" => $this->getExtension($file),
+         "attachment_path" => $path
+      ]);
+
+      return ! empty($attachment) ? $attachment : null;
    }
 
 

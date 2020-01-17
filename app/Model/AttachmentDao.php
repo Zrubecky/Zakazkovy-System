@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
@@ -30,7 +32,7 @@ class AttachmentDao
     * Saves order attachment into the database.
     *
     * @param array $attachmentData [$column => $value].
-    * @return ActiveRow
+    * @return ActiveRow|int|bool
     */
    public function save(array $attachmentData)
    {

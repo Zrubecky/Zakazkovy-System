@@ -1,9 +1,12 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
 use Nette\Database\Context;
+use Nette\Database\Table\ActiveRow;
 
 /**
  * Data access object for order types.
@@ -42,9 +45,9 @@ class OrderTypeDao
     * Fetches order type by type id.
     *
     * @param integer $typeId
-    * @return ActiveRow|bool
+    * @return ActiveRow|null
     */
-   public function findById(int $typeId)
+   public function findById(int $typeId): ?ActiveRow
    {
       return $this->database->table(self::TYPES_TABLE)->get($typeId);
    }

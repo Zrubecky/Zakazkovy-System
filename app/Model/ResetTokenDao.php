@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
@@ -30,9 +32,9 @@ class ResetTokenDao
     * Fetches reset token data by token.
     *
     * @param string $resetToken
-    * @return ActiveRow|bool
+    * @return ActiveRow|null
     */
-   public function findByResetToken(string $resetToken)
+   public function findByResetToken(string $resetToken): ?ActiveRow
    {
       return $this->database->table(self::RESET_TOKENS_TABLE)->where("token", $resetToken)->fetch();
    }
@@ -43,14 +45,16 @@ class ResetTokenDao
     *
     * @param integer $userId id of the registered user which generated the token.
     * @param string $resetToken
-    * @return ActiveRow
+    * @return ActiveRow|null
     */
-   public function insertToken(int $userId, string $resetToken): ActiveRow
+   public function insertToken(int $userId, string $resetToken): ?ActiveRow
    {
-      return $this->database->table(self::RESET_TOKENS_TABLE)->insert([
+      $token = $this->database->table(self::RESET_TOKENS_TABLE)->insert([
          "user_id" => $userId,
          "token" => $resetToken
       ]);
+
+      return ! empty($token) ? $token : null;
    }
 
    

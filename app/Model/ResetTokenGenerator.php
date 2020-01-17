@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
@@ -27,9 +29,9 @@ class ResetTokenGenerator {
     * Generates new reset token into the database and returns it
     *
     * @param integer $userId
-    * @return ActiveRow
+    * @return ActiveRow|null
     */
-   public function generateToken(int $userId): ActiveRow
+   public function generateToken(int $userId): ?ActiveRow
    {
       $resetToken = Random::generate(32);
 

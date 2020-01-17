@@ -1,5 +1,7 @@
 <?php 
 
+declare(strict_types=1);
+
 namespace App\Model;
 
 use Nette;
@@ -26,7 +28,7 @@ class ResetTokenValidator {
     * Checks if the reset token is valid.
     *
     * @param string $resetToken
-    * @return boolean
+    * @return bool
     */
    public function resetTokenValid(string $resetToken): bool
    {
@@ -49,17 +51,15 @@ class ResetTokenValidator {
     * Cheks if the reset token is not older than 15 minutes.
     *
     * @param DateTime $creationDate
-    * @return boolean
+    * @return bool
     */
    protected function creationDateValid(DateTime $creationDate): bool
    {
       $now = DateTime::from(time());
+      $thresholdDate = $creationDate->modify("+ 15 minutes"); 
 
-      if ($now > $creationDate->modify("+ 15 minutes")) {
-         return false;
-      } else {
-         return true;
-      }
+      return $now > $thresholdDate ? false : true;
+
    }
 
 }
