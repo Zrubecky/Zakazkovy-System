@@ -49,7 +49,7 @@ class OrderDao
     *
     * @return array
     */
-   public function getOrders(int $userId)
+   public function getOrders(int $userId): array
    {
       $orders = $this->database->table(self::ORDERS_TABLE)
       ->where("user_id = ?", $userId)
