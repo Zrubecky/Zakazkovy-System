@@ -14,7 +14,7 @@ use App\Model\AttachmentStorage;
 /**
  * Handles creating new user orders.
  */
-class OrderPresenter extends Nette\Application\UI\Presenter
+class OrderPresenter extends BasePresenter
 {
    /** @var OrderTypeDao */
    private $orderTypeDao;

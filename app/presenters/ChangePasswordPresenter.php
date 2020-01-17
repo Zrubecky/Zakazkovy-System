@@ -10,7 +10,7 @@ use App\Model\PasswordVerificationException;
 /**
  * Handles user password change via the user settings.
  */
-class ChangePasswordPresenter extends Nette\Application\UI\Presenter
+class ChangePasswordPresenter extends BasePresenter
 {
    /** @var UserPasswordChanger */
    private $userPasswordChanger;

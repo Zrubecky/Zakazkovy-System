@@ -12,7 +12,7 @@ use App\Model\ConfirmEmailMailer;
 /**
  * Handles user registration process.
  */
-class RegistrationPresenter extends Nette\Application\UI\Presenter
+class RegistrationPresenter extends BasePresenter
 {
    /** @var UserRegistrator */
    private $UserRegistrator;

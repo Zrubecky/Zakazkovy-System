@@ -8,7 +8,7 @@ use Nette\Application\UI\Form;
 /**
  * Handles user signing in and out of the application.
  */
-class SignPresenter extends Nette\Application\UI\Presenter
+class SignPresenter extends BasePresenter
 {
    /**
     * Sign in form factory.

@@ -7,7 +7,7 @@ use Nette;
 /**
  * Main homepage (user order dashboard.)
  */
-final class HomepagePresenter extends Nette\Application\UI\Presenter
+final class HomepagePresenter extends BasePresenter
 {
    public function startup(): void 
    {

@@ -10,7 +10,7 @@ use App\Model\RegisteredUserDao;
 /**
  * Presenter for password reset request generation.
  */
-class ResetPasswordRequestPresenter extends Nette\Application\UI\Presenter
+class ResetPasswordRequestPresenter extends BasePresenter
 {
    /** @var PasswordResetRequestGenerator */
    private $passwordResetRequestGenerator;

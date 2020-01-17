@@ -14,7 +14,7 @@ use App\Model\App\Model\TokenVerificationException;
 /**
  * Handles user password reset.
  */
-class ResetPasswordPresenter extends Nette\Application\UI\Presenter
+class ResetPasswordPresenter extends BasePresenter
 {
    /** @var ResetTokenValidator */
    private $resetTokenValidator;
