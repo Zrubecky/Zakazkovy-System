@@ -34,7 +34,7 @@ class ResetTokenDao
     */
    public function findByResetToken(string $resetToken)
    {
-      return $this->database->table($this::RESET_TOKENS_TABLE)->where("token", $resetToken)->fetch();
+      return $this->database->table(self::RESET_TOKENS_TABLE)->where("token", $resetToken)->fetch();
    }
 
 
@@ -47,7 +47,7 @@ class ResetTokenDao
     */
    public function insertToken(int $userId, string $resetToken): ActiveRow
    {
-      return $this->database->table($this::RESET_TOKENS_TABLE)->insert([
+      return $this->database->table(self::RESET_TOKENS_TABLE)->insert([
          "user_id" => $userId,
          "token" => $resetToken
       ]);
@@ -62,7 +62,7 @@ class ResetTokenDao
     */
    public function deleteToken(string $resetToken): int
    {
-      return $this->database->table($this::RESET_TOKENS_TABLE)
+      return $this->database->table(self::RESET_TOKENS_TABLE)
          ->where("token", $resetToken)
          ->delete();
    }

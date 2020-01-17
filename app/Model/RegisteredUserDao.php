@@ -31,7 +31,7 @@ class RegisteredUserDao {
     */
    public function findbyId(int $userId)
    {
-      return $this->database->table($this::USERS_TABLE)->get($userId);
+      return $this->database->table(self::USERS_TABLE)->get($userId);
    }
 
 
@@ -43,7 +43,7 @@ class RegisteredUserDao {
     */
    public function findByEmail(string $email)
    {
-      return $this->database->table($this::USERS_TABLE)->where("email", $email)->fetch();
+      return $this->database->table(self::USERS_TABLE)->where("email", $email)->fetch();
    }
 
 
@@ -55,7 +55,7 @@ class RegisteredUserDao {
     */
    public function findByResetToken(string $resetToken)
    {
-      $user = $this->database->table($this::USERS_TABLE)
+      $user = $this->database->table(self::USERS_TABLE)
          ->where(":reset_tokens(user).token LIKE ?", $resetToken)
          ->fetch();
 

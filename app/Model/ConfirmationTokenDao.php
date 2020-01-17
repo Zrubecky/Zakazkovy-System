@@ -33,7 +33,7 @@ class ConfirmationTokenDao
     */
    public function findByToken(string $confirmationToken)
    {
-      return $this->database->table($this::CONFIRMATION_TOKENS_TABLE)->where("token", $confirmationToken)->fetch();
+      return $this->database->table(self::CONFIRMATION_TOKENS_TABLE)->where("token", $confirmationToken)->fetch();
    }
 
 
@@ -46,7 +46,7 @@ class ConfirmationTokenDao
     */
    public function insertToken(int $userId, string $confirmationToken)
    {
-      return $this->database->table($this::CONFIRMATION_TOKENS_TABLE)->insert([
+      return $this->database->table(self::CONFIRMATION_TOKENS_TABLE)->insert([
          "user_id" => $userId,
          "token" => $confirmationToken
       ]);
@@ -61,7 +61,7 @@ class ConfirmationTokenDao
     */
    public function deleteToken(string $confirmationToken): int
    {
-      return $this->database->table($this::CONFIRMATION_TOKENS_TABLE)
+      return $this->database->table(self::CONFIRMATION_TOKENS_TABLE)
          ->where("token", $confirmationToken)
          ->delete();
    }

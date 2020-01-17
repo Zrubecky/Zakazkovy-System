@@ -34,7 +34,7 @@ class AttachmentDao
     */
    public function save(array $attachmentData)
    {
-      $attachment = $this->database->table($this::ATTACHMENT_TABLE)->insert($attachmentData);
+      $attachment = $this->database->table(self::ATTACHMENT_TABLE)->insert($attachmentData);
 
       return $attachment;
    }

@@ -18,11 +18,13 @@ class OrderDao
    /** @var string */
    private $orderTable;
 
+   /** @var string */
+   private const ORDERS_TABLE = "orders";
+
    
    public function __construct(Context $database)
    {
       $this->database = $database;
-      $this->orderTable = "orders";
    }
 
    
@@ -34,7 +36,7 @@ class OrderDao
     */
    public function addOrder(array $orderData)
    {
-      $order = $this->database->table($this->orderTable)->insert($orderData);
+      $order = $this->database->table(self::ORDERS_TABLE)->insert($orderData);
 
       return $order;
    }

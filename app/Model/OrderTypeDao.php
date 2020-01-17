@@ -18,10 +18,12 @@ class OrderTypeDao
    /** @var string */
    private $typeTable;
 
+   /** @var string */
+   private const TYPES_TABLE = "order_types";
+
    public function __construct(Context $database)
    {
       $this->database = $database;
-      $this->typeTable = "order_types";
    }
 
 
@@ -32,7 +34,7 @@ class OrderTypeDao
     */
    public function findAllTypes(): array
    {
-      return $this->database->table($this->typeTable)->fetchAll();
+      return $this->database->table(self::TYPES_TABLE)->fetchAll();
    }
 
    
@@ -44,6 +46,6 @@ class OrderTypeDao
     */
    public function findById(int $typeId)
    {
-      return $this->database->table($this->typeTable)->get($typeId);
+      return $this->database->table(self::TYPES_TABLE)->get($typeId);
    }
 }
