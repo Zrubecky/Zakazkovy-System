@@ -40,3 +40,17 @@ var datePickerFactory = {
       });
    }
 }
+
+var textHider = {
+   bindUI: function() {
+      $('[data-toggle="collapse"]').click(function() {
+         $(this).toggleClass("active");
+         
+         if ($(this).hasClass("active")) {
+            $(this).text("Skrýt");
+         } else {
+            $(this).text("Zobrazit");
+         }
+      });
+   }
+}

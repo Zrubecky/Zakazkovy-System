@@ -8,7 +8,7 @@
          </div>
 
          <div class="card-body">
-            <h3 class="card-title">{$order->name}</h3>
+            <h4 class="card-title">{$order->name}</h4>
 
             <h5>Typ:</h5>
             <p class="card-text lead">{$order->ref("order_types","type_id")->type}</p>
@@ -17,7 +17,11 @@
             <p class="card-text lead">{$order->date|date:'%d.%m.%Y'}</p>
 
             <h5>Popis:</h5>
-            <p class="card-text lead">{($order->description)|breaklines}</p>
+            <div class="collapse" id="collapseText">
+               <p class="card-text lead">{($order->description)|breaklines}</p>
+            </div>
+
+            <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseText" aria-expanded="false" aria-controls="collapseText">Zobrazit popis</button>
          </div>
 
       </div>
@@ -26,3 +30,13 @@
    {/if}
 
 {/block}
+
+{block scripts}
+   {include #parent}
+
+   <script>
+   $(document).ready(function() {
+      textHider.bindUI();
+   });
+   </script>
+{block}
