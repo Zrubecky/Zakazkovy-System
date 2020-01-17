@@ -5,6 +5,8 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
+declare(strict_types=1);
+
 namespace Nette\Loaders;
 
 use Nette;
@@ -26,12 +28,12 @@ class RobotLoader
 {
 	use Nette\SmartObject;
 
-	const RETRY_LIMIT = 3;
+	private const RETRY_LIMIT = 3;
 
-	/** @var array */
+	/** @var string[] */
 	public $ignoreDirs = ['.*', '*.old', '*.bak', '*.tmp', 'temp'];
 
-	/** @var array */
+	/** @var string[] */
 	public $acceptFiles = ['*.php'];
 
 	/** @var bool */
@@ -40,10 +42,10 @@ class RobotLoader
 	/** @var bool */
 	private $reportParseErrors = true;
 
-	/** @var array */
+	/** @var string[] */
 	private $scanPaths = [];
 
-	/** @var array */
+	/** @var string[] */
 	private $excludeDirs = [];
 
 	/** @var array of class => [file, time] */
@@ -69,10 +71,8 @@ class RobotLoader
 
 	/**
 	 * Register autoloader.
-	 * @param  bool  $prepend
-	 * @return static
 	 */
-	public function register($prepend = false)
+	public function register(bool $prepend = false): self
 	{
 		$this->loadCache();
 		spl_autoload_register([$this, 'tryLoad'], true, $prepend);
@@ -82,13 +82,11 @@ class RobotLoader
 
 	/**
 	 * Handles autoloading of classes, interfaces or traits.
-	 * @param  string  $type
-	 * @return void
 	 */
-	public function tryLoad($type)
+	public function tryLoad(string $type): void
 	{
 		$type = ltrim($type, '\\'); // PHP namespace bug #49143
-		$info = isset($this->classes[$type]) ? $this->classes[$type] : null;
+		$info = $this->classes[$type] ?? null;
 
 		if ($this->autoRebuild) {
 			if (!$info || !is_file($info['file'])) {
@@ -109,45 +107,48 @@ class RobotLoader
 				}
 				$this->saveCache();
 			}
-			$info = isset($this->classes[$type]) ? $this->classes[$type] : null;
+			$info = $this->classes[$type] ?? null;
 		}
 
 		if ($info) {
-			call_user_func(function ($file) { require $file; }, $info['file']);
+			(static function ($file) { require $file; })($info['file']);
 		}
 	}
 
 
 	/**
 	 * Add path or paths to list.
-	 * @param  string|string[]  $path  absolute path
-	 * @return static
+	 * @param  string  ...$paths  absolute path
 	 */
-	public function addDirectory($path)
+	public function addDirectory(...$paths): self
 	{
-		$this->scanPaths = array_merge($this->scanPaths, (array) $path);
+		if (is_array($paths[0] ?? null)) {
+			trigger_error(__METHOD__ . '() use variadics ...$paths to add an array of paths.', E_USER_WARNING);
+			$paths = $paths[0];
+		}
+		$this->scanPaths = array_merge($this->scanPaths, $paths);
 		return $this;
 	}
 
 
-	/**
-	 * @return static
-	 */
-	public function reportParseErrors($on = true)
+	public function reportParseErrors(bool $on = true): self
 	{
-		$this->reportParseErrors = (bool) $on;
+		$this->reportParseErrors = $on;
 		return $this;
 	}
 
 
 	/**
 	 * Excludes path or paths from list.
-	 * @param  string|string[]  $path  absolute path
-	 * @return static
+	 * @param  string  ...$paths  absolute path
 	 */
-	public function excludeDirectory($path)
+	public function excludeDirectory(...$paths): self
 	{
-		$this->excludeDirs = array_merge($this->excludeDirs, (array) $path);
+		if (is_array($paths[0] ?? null)) {
+			trigger_error(__METHOD__ . '() use variadics ...$paths to add an array of paths.', E_USER_WARNING);
+			$paths = $paths[0];
+		}
+		$this->excludeDirs = array_merge($this->excludeDirs, $paths);
 		return $this;
 	}
 
@@ -155,7 +156,7 @@ class RobotLoader
 	/**
 	 * @return array of class => filename
 	 */
-	public function getIndexedClasses()
+	public function getIndexedClasses(): array
 	{
 		$res = [];
 		foreach ($this->classes as $class => $info) {
@@ -167,9 +168,8 @@ class RobotLoader
 
 	/**
 	 * Rebuilds class list cache.
-	 * @return void
 	 */
-	public function rebuild()
+	public function rebuild(): void
 	{
 		$this->classes = $this->missing = [];
 		$this->refreshClasses();
@@ -181,9 +181,8 @@ class RobotLoader
 
 	/**
 	 * Refreshes class list cache.
-	 * @return void
 	 */
-	public function refresh()
+	public function refresh(): void
 	{
 		$this->loadCache();
 		if (!$this->refreshed) {
@@ -195,9 +194,8 @@ class RobotLoader
 
 	/**
 	 * Refreshes $classes.
-	 * @return void
 	 */
-	private function refreshClasses()
+	private function refreshClasses(): void
 	{
 		$this->refreshed = true; // prevents calling refreshClasses() or updateFile() in tryLoad()
 		$files = [];
@@ -233,16 +231,18 @@ class RobotLoader
 
 	/**
 	 * Creates an iterator scaning directory for PHP files, subdirectories and 'netterobots.txt' files.
-	 * @return Nette\Utils\Finder
 	 * @throws Nette\IOException if path is not found
 	 */
-	private function createFileIterator($dir)
+	private function createFileIterator(string $dir): Nette\Utils\Finder
 	{
 		if (!is_dir($dir)) {
 			throw new Nette\IOException("File or directory '$dir' not found.");
 		}
 
-		$ignoreDirs = is_array($this->ignoreDirs) ? $this->ignoreDirs : preg_split('#[,\s]+#', $this->ignoreDirs);
+		if (is_string($ignoreDirs = $this->ignoreDirs)) {
+			trigger_error(__CLASS__ . ': $ignoreDirs must be an array.', E_USER_WARNING);
+			$ignoreDirs = preg_split('#[,\s]+#', $ignoreDirs);
+		}
 		$disallow = [];
 		foreach (array_merge($ignoreDirs, $this->excludeDirs) as $item) {
 			if ($item = realpath($item)) {
@@ -250,7 +250,11 @@ class RobotLoader
 			}
 		}
 
-		$acceptFiles = is_array($this->acceptFiles) ? $this->acceptFiles : preg_split('#[,\s]+#', $this->acceptFiles);
+		if (is_string($acceptFiles = $this->acceptFiles)) {
+			trigger_error(__CLASS__ . ': $acceptFiles must be an array.', E_USER_WARNING);
+			$acceptFiles = preg_split('#[,\s]+#', $acceptFiles);
+		}
+
 		$iterator = Nette\Utils\Finder::findFiles($acceptFiles)
 			->filter(function (SplFileInfo $file) use (&$disallow) {
 				return !isset($disallow[str_replace('\\', '/', $file->getRealPath())]);
@@ -274,10 +278,7 @@ class RobotLoader
 	}
 
 
-	/**
-	 * @return void
-	 */
-	private function updateFile($file)
+	private function updateFile(string $file): void
 	{
 		foreach ($this->classes as $class => $info) {
 			if (isset($info['file']) && $info['file'] === $file) {
@@ -302,29 +303,18 @@ class RobotLoader
 
 	/**
 	 * Searches classes, interfaces and traits in PHP file.
-	 * @param  string  $file
 	 * @return string[]
 	 */
-	private function scanPhp($file)
+	private function scanPhp(string $file): array
 	{
 		$code = file_get_contents($file);
 		$expected = false;
-		$namespace = '';
+		$namespace = $name = '';
 		$level = $minLevel = 0;
 		$classes = [];
 
-		if (preg_match('#//nette' . 'loader=(\S*)#', $code, $matches)) {
-			foreach (explode(',', $matches[1]) as $name) {
-				$classes[] = $name;
-			}
-			return $classes;
-		}
-
-
 		try {
-			$tokens = PHP_VERSION_ID >= 70000
-				? token_get_all($code, TOKEN_PARSE)
-				: @token_get_all($code); // @ can be corrupted or can use newer syntax
+			$tokens = token_get_all($code, TOKEN_PARSE);
 		} catch (\ParseError $e) {
 			if ($this->reportParseErrors) {
 				$rp = new \ReflectionProperty($e, 'file');
@@ -396,20 +386,18 @@ class RobotLoader
 
 	/**
 	 * Sets auto-refresh mode.
-	 * @return static
 	 */
-	public function setAutoRefresh($on = true)
+	public function setAutoRefresh(bool $on = true): self
 	{
-		$this->autoRebuild = (bool) $on;
+		$this->autoRebuild = $on;
 		return $this;
 	}
 
 
 	/**
 	 * Sets path to temporary directory.
-	 * @return static
 	 */
-	public function setTempDirectory($dir)
+	public function setTempDirectory(string $dir): self
 	{
 		Nette\Utils\FileSystem::createDir($dir);
 		$this->tempDirectory = $dir;
@@ -419,22 +407,21 @@ class RobotLoader
 
 	/**
 	 * Loads class list from cache.
-	 * @return void
 	 */
-	private function loadCache()
+	private function loadCache(): void
 	{
 		$file = $this->getCacheFile();
-		list($this->classes, $this->missing) = @include $file; // @ file may not exist
+		[$this->classes, $this->missing] = @include $file; // @ file may not exist
 		if (is_array($this->classes)) {
 			return;
 		}
 
-		$handle = fopen("$file.lock", 'c+');
+		$handle = fopen("$file.lock", 'cb+');
 		if (!$handle || !flock($handle, LOCK_EX)) {
 			throw new \RuntimeException("Unable to create or acquire exclusive lock on file '$file.lock'.");
 		}
 
-		list($this->classes, $this->missing) = @include $file; // @ file may not exist
+		[$this->classes, $this->missing] = @include $file; // @ file may not exist
 		if (!is_array($this->classes)) {
 			$this->rebuild();
 		}
@@ -447,9 +434,8 @@ class RobotLoader
 
 	/**
 	 * Writes class list to cache.
-	 * @return void
 	 */
-	private function saveCache()
+	private function saveCache(): void
 	{
 		$file = $this->getCacheFile();
 		$tempFile = $file . uniqid('', true) . '.tmp';
@@ -464,10 +450,7 @@ class RobotLoader
 	}
 
 
-	/**
-	 * @return string
-	 */
-	private function getCacheFile()
+	private function getCacheFile(): string
 	{
 		if (!$this->tempDirectory) {
 			throw new \LogicException('Set path to temporary directory using setTempDirectory().');
@@ -476,10 +459,7 @@ class RobotLoader
 	}
 
 
-	/**
-	 * @return array
-	 */
-	protected function getCacheKey()
+	protected function getCacheKey(): array
 	{
 		return [$this->ignoreDirs, $this->acceptFiles, $this->scanPaths, $this->excludeDirs];
 	}

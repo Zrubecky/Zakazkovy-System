@@ -22,6 +22,8 @@ RobotLoader is a tool that gives you comfort of automated class loading for your
 
 RobotLoader is incredibly comfortable and addictive!
 
+It requires PHP version 7.1 and supports PHP up to 7.4.
+
 If you like Nette, **[please make a donation now](https://nette.org/donate)**. Thank you!
 
 So we can forget about those famous code blocks:
@@ -48,7 +50,7 @@ The recommended way to install is via Composer:
 composer require nette/robot-loader
 ```
 
-It requires PHP version 5.6 and supports PHP up to 7.3.
+It requires PHP version 7.1.
 
 
 Usage
@@ -77,7 +79,7 @@ This feature should be disabled on production server.
 
 If you want RobotLoader to skip some directory, use `$loader->excludeDirectory('temp')`.
 
-By default, RobotLoader reports errors in PHP files by throwing exception `ParseError` (since PHP 7.0). It can be disabled via `$loader->reportParseErrors(false)`.
+By default, RobotLoader reports errors in PHP files by throwing exception `ParseError`. It can be disabled via `$loader->reportParseErrors(false)`.
 
 
 PHP files analyzer
