@@ -2,14 +2,14 @@
 
 Zakázkový systém vytvořený jako cvičení frameworku Nette. Aplikace obsahuje login systém a systém pro zadávání a přehled zakázek do firmy zabývající se vývojem webových stránek a aplikací.
 
-Uživatel se může do systému zaregistrovat, měnit/resetovat heslo a zadávat zakázky. Úvodní obrazovka obsahuje přehled zakázek.
+Uživatel se může do systému zaregistrovat, měnit/resetovat heslo, zadávat zakázky a uploadovat přílohy. Úvodní obrazovka obsahuje přehled zakázek.
 
 ## Instalace
 
 Po stažení apliakce je nutné nainstalovat framework Nette 3.0 pomocí:
 
 ```
-Composer install
+composer install
 ```
 
 ### Databáze
@@ -17,7 +17,7 @@ Composer install
 Dále je nutné vytvořit si databázi. Databáze je připravena ve složce:
 
 ```
-database
+database/
 ```
 
 v kořenovém adresáři.
