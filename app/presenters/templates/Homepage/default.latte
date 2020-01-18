@@ -17,11 +17,11 @@
             <p class="card-text lead">{$order->date|date:'%d.%m.%Y'}</p>
 
             <h5>Popis:</h5>
-            <div class="collapse" id="collapseText">
+            <div class="collapse" id="collapse-text-{$order->id}">
                <p class="card-text lead">{($order->description)|breaklines}</p>
             </div>
 
-            <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseText" aria-expanded="false" aria-controls="collapseText">Zobrazit popis</button>
+            <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapse-text-{$order->id}" aria-expanded="false" aria-controls="collapse-text-{$order->id}">Zobrazit</button>
          </div>
 
       </div>
