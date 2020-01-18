@@ -4,3 +4,4 @@ app/config/config.local.neon
 !/log/.htaccess
 /temp/*
 !/temp/.htaccess
+/vendor/*
