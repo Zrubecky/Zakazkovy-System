@@ -6,7 +6,7 @@ namespace App\Model;
 
 use Nette;
 use Nette\Database\Context;
-
+use Nette\Database\Table\ActiveRow;
 
 /**
  * Data access object for order attachments.
@@ -32,13 +32,13 @@ class AttachmentDao
     * Saves order attachment into the database.
     *
     * @param array $attachmentData [$column => $value].
-    * @return ActiveRow|int|bool
+    * @return ActiveRow|null
     */
-   public function save(array $attachmentData)
+   public function save(array $attachmentData): ?ActiveRow
    {
       $attachment = $this->database->table(self::ATTACHMENT_TABLE)->insert($attachmentData);
 
-      return $attachment;
+      return ! empty($attachment) ? $attachment : null;
    }
 
 }
