@@ -1,5 +1,5 @@
 parameters:
-	attachmentsDir: %wwwDir%/attachments/
+	attachmentsDir: %appDir%/../uploads/attachments/
 
 	mailer:
 		smtp: true
