@@ -1,20 +1,39 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+declare(strict_types=1);
 
-$configurator = new Nette\Configurator;
+namespace App;
 
-//$configurator->setDebugMode(false); // enable for your remote IP
-$configurator->enableTracy(__DIR__ . '/../log');
+use Nette\Configurator;
 
-$configurator->setTimeZone('Europe/Prague');
-$configurator->setTempDirectory(__DIR__ . '/../temp');
+class Bootstrap
+{
+	public static function boot(): Configurator
+	{
+		$configurator = new Configurator;
 
-$configurator->createRobotLoader()
-	->addDirectory(__DIR__)
-	->register();
+		//$configurator->setDebugMode(false); // enable for your remote IP
+		$configurator->enableTracy(__DIR__ . '/../log');
 
-$configurator->addConfig(__DIR__ . '/config/config.neon');
-$configurator->addConfig(__DIR__ . '/config/config.local.neon');
+		$configurator->setTimeZone('Europe/Prague');
+		$configurator->setTempDirectory(__DIR__ . '/../temp');
 
-return $configurator->createContainer();
+		$configurator->createRobotLoader()
+			->addDirectory(__DIR__)
+			->register();
+
+		$configurator
+			->addConfig(__DIR__ . '/config/config.neon')
+			->addConfig(__DIR__ . '/config/config.local.neon');
+
+		return $configurator;
+	}
+
+
+	public static function bootForTests(): Configurator
+	{
+		$configurator = self::boot();
+		\Tester\Environment::setup();
+		return $configurator;
+	}
+}
