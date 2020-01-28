@@ -48,6 +48,10 @@ class UserAuthenticator implements Nette\Security\IAuthenticator {
          throw new Nette\Security\AuthenticationException("Invalid password.");
       }
 
+      if ($this->passwords->needsRehash($row->password)) {
+         $this->RegisteredUserDao->updatePassword($row->id, $this->passwords->hash($password));
+      }
+
       return new Nette\Security\Identity($row->id, null, [
          "email" => $row->email, 
          "fullName" => $row->first_name . " " . $row->surname, 
