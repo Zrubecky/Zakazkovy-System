@@ -1,9 +1,12 @@
 {
-	"name": "nette/web-project",
-	"description": "Nette: Standard Web Project",
-	"keywords": ["nette"],
+	"name": "filip-zrubecky/zakazkovy-system",
+	"description": "Zakázkový systém vytvořený jako cvičení frameworku Nette. Aplikace obsahuje login systém a systém pro zadávání a přehled zakázek do firmy zabývající se vývojem webových stránek a aplikací.",
+	"keywords": ["zakázkový systém", "zakázka", "CMS", "aplikace"],
 	"type": "project",
 	"license": ["MIT", "BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"author": {
+		"name": "Filip Zrubecký"
+	},
 	"require": {
 		"php": ">=7.4",
 		"nette/application": "^3.0",
@@ -25,7 +28,13 @@
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",
-		"symplify/easy-coding-standard": "^7.2"
+		"symplify/easy-coding-standard": "^7.2",
+		"phpstan/phpstan": "^0.12.8",
+		"phpstan/extension-installer": "^1.0",
+		"phpstan/phpstan-nette": "^0.12.3"
+	},
+	"autoload": {
+		"classmap": ["app/Bootstrap.php"]
 	},
 	"minimum-stability": "stable",
 	"config": {
