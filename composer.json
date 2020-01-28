@@ -24,7 +24,8 @@
 		"dg/adminer-custom": "^1.8"
 	},
 	"require-dev": {
-		"nette/tester": "^2.0"
+		"nette/tester": "^2.0",
+		"symplify/easy-coding-standard": "^7.2"
 	},
 	"minimum-stability": "stable",
 	"config": {

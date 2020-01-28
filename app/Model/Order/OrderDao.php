@@ -19,9 +19,6 @@ class OrderDao
    private $database;
 
    /** @var string */
-   private $orderTable;
-
-   /** @var string */
    private const ORDERS_TABLE = "orders";
 
    
@@ -51,12 +48,10 @@ class OrderDao
     */
    public function getOrders(int $userId): array
    {
-      $orders = $this->database->table(self::ORDERS_TABLE)
+      return $this->database->table(self::ORDERS_TABLE)
       ->where("user_id = ?", $userId)
       ->order("created_at")
       ->fetchAll();
-
-      return $orders;
    }
 
 }

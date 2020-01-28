@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Model;
 
 use Nette;
-use Nette\Mail\IMailer;
-use Nette\Application\UI\ITemplateFactory;
 use Nette\Application\LinkGenerator;
+use Nette\Application\UI\ITemplateFactory;
+use Nette\Mail\IMailer;
 
 /**
  * Base object for all specific mailers.

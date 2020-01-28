@@ -2,14 +2,13 @@
 
 namespace App\Presenters;
 
-use Nette;
-use Nette\Application\UI\Form;
-use App\Model\ResetTokenValidator;
+use App\Model\App\Model\TokenVerificationException;
+use App\Model\PasswordResetMailer;
 use App\Model\RegisteredUserDao;
 use App\Model\ResetTokenDao;
+use App\Model\ResetTokenValidator;
 use App\Model\UserPasswordReseter;
-use App\Model\PasswordResetMailer;
-use App\Model\App\Model\TokenVerificationException;
+use Nette\Application\UI\Form;
 
 /**
  * Handles user password reset.

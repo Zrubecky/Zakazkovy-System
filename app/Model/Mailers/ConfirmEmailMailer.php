@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Nette;
-use App\Model\BaseMailer;
 
 /**
  * Handles registration confirmation email.

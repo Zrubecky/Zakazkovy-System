@@ -6,11 +6,10 @@ namespace App\Model;
 
 
 use Nette;
+use Nette\Database\Table\ActiveRow;
 use Nette\Http\FileUpload;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Random;
-use Nette\Database\Table\ActiveRow;
-use App\Model\AttachmentDao;
 
 /**
  * Handles attachment storage into the database and on the server.
@@ -52,7 +51,7 @@ class AttachmentStorage {
     */
    public function saveMultiple(iterable $files, int $orderId): array
    {
-      $attachments = array();
+      $attachments = [];
 
       foreach ($files as $file) {
          $attachment = $this->save($file, $orderId);

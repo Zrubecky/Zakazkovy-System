@@ -6,7 +6,6 @@ namespace App\Model;
 
 use Nette;
 use Nette\security\Passwords;
-use App\Model\RegisteredUserDao;
 
 /**
  * Handles user password reset.

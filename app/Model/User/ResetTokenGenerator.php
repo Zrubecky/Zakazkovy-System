@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Model;
 
 use Nette;
-use Nette\Utils\Random;
 use Nette\database\Table\ActiveRow;
-use App\Model\ResetTokenDao;
+use Nette\Utils\Random;
 
 /**
  * Handles reset token generation.

@@ -6,7 +6,6 @@ namespace App\Model;
 
 use Nette;
 use Nette\Security\Passwords;
-use App\Model\RegisteredUserDao;
 
 /**
  * Handles the user authentication.

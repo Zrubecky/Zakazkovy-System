@@ -2,7 +2,6 @@
 
 namespace App\Presenters;
 
-use Nette;
 use App\model\OrderDao;
 
 /**

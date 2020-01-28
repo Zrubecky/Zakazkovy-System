@@ -2,14 +2,13 @@
 
 namespace App\Presenters;
 
-use Nette;
-use Nette\Application\UI\Form;
-use Nette\Utils\DateTime;
-use App\Model\OrderTypeDao;
+use App\Model\AttachmentStorage;
 use App\Model\OrderDao;
 use App\Model\OrderMailer;
+use App\Model\OrderTypeDao;
 use App\Model\OrderValidator;
-use App\Model\AttachmentStorage;
+use Nette\Application\UI\Form;
+use Nette\Utils\DateTime;
 
 /**
  * Handles creating new user orders.
@@ -49,7 +48,7 @@ class OrderPresenter extends BasePresenter
       $this->orderMailer = $orderMailer;
       $this->orderValidator = $orderValidator;
       $this->attachmentStorage = $attachmentStorage;
-      $this->orderTypeNames = array();
+      $this->orderTypeNames = [];
    }
 
 

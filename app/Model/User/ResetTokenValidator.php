@@ -6,7 +6,6 @@ namespace App\Model;
 
 use Nette;
 use Nette\Utils\DateTime;
-use App\Model\TokenVerificationException;
 
 /**
  * Handles reset token validation.

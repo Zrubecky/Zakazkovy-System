@@ -2,10 +2,10 @@
 
 namespace App\Presenters;
 
-use Nette;
+use App\Model\ConfirmationTokenDao;
 use App\Model\ConfirmationTokenValidator;
 use App\Model\RegisteredUserDao;
-use App\Model\ConfirmationTokenDao;
+use Nette;
 
 /**
  * Handles user registration email confirmation.

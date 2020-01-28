@@ -19,9 +19,6 @@ class OrderTypeDao
    private $database;
 
    /** @var string */
-   private $typeTable;
-
-   /** @var string */
    private const TYPES_TABLE = "order_types";
 
    public function __construct(Context $database)

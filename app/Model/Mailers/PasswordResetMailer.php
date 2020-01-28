@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Nette;
-use App\Model\BaseMailer;
 
 /**
  * Handles sending password reset request and confirmation emails.

@@ -2,12 +2,11 @@
 
 namespace App\Presenters;
 
-use Nette;
-use Nette\Application\UI\Form;
-use App\Model\UserRegistrator;
-use App\Model\RegisteredUserDao;
 use App\Model\ConfirmationTokenGenerator;
 use App\Model\ConfirmEmailMailer;
+use App\Model\RegisteredUserDao;
+use App\Model\UserRegistrator;
+use Nette\Application\UI\Form;
 
 /**
  * Handles user registration process.

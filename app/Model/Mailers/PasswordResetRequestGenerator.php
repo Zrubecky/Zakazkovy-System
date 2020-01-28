@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Model;
 
 use Nette;
-use App\Model\ResetTokenGenerator;
-use App\Model\PasswordResetMailer;
 
 /**
  * Handles password reset request generation.

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Nette;
 use Nette\Database\Context;
 use Nette\Database\Table\ActiveRow;
 
@@ -58,11 +57,9 @@ class RegisteredUserDao {
     */
    public function findByResetToken(string $resetToken): ?ActiveRow
    {
-      $user = $this->database->table(self::USERS_TABLE)
+      return $this->database->table(self::USERS_TABLE)
          ->where(":reset_tokens(user).token LIKE ?", $resetToken)
          ->fetch();
-
-      return $user;
    }
 
 
@@ -74,12 +71,9 @@ class RegisteredUserDao {
     */
    public function findByConfirmationToken(string $confirmationToken): ?ActiveRow
    {
-      $user = $this->database->table($this::USERS_TABLE)
+      return $this->database->table($this::USERS_TABLE)
          ->where(":confirmation_tokens(user).token LIKE ?", $confirmationToken)
          ->fetch();
-
-      return $user;
-
    }
 
 
@@ -92,11 +86,9 @@ class RegisteredUserDao {
     */
    public function updatePassword(int $userId, string $passwordHash): int
    {
-      $count = $this->database->table($this::USERS_TABLE)
+      return $this->database->table($this::USERS_TABLE)
          ->where("id", $userId)
          ->update(["password" => $passwordHash]);
-
-      return $count;
    }
 
    
@@ -109,10 +101,8 @@ class RegisteredUserDao {
     */
    public function updateAccountStatus(int $userId, string $status): int 
    {
-      $count = $this->database->table($this::USERS_TABLE)
+      return $this->database->table($this::USERS_TABLE)
          ->where("id", $userId)
          ->update(["account_status" => $status]);
-      
-      return $count;
    }
 }

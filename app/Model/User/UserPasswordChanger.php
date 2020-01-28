@@ -6,8 +6,6 @@ namespace App\Model;
 
 use Nette;
 use Nette\security\Passwords;
-use App\Model\RegisteredUserDao;
-use App\Model\PasswordVerificationException;
 
 /**
  * Handles user password change.

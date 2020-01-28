@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Model;
 
 use Nette;
-use Nette\Utils\Random;
-use App\Model\ConfirmationTokenDao;
 use Nette\database\Table\ActiveRow;
+use Nette\Utils\Random;
 
 /**
  * Handles confirmation token generation and database insertion.

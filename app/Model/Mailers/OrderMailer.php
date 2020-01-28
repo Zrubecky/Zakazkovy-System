@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Nette;
-use App\Model\BaseMailer;
 
 /**
  * Handles order summary email.
@@ -20,7 +19,7 @@ class OrderMailer extends BaseMailer {
     * @param iterable $attachments
     * @return void
     */
-   public function sendOrderMail(string $email, \stdClass $orderParams, iterable $attachments = array()): void
+   public function sendOrderMail(string $email, \stdClass $orderParams, iterable $attachments = []): void
    {
       $template = $this->createTemplate(__DIR__ . "/templates/orderSummary.latte");
 
