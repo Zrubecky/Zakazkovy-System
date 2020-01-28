@@ -13,7 +13,10 @@ use Nette\database\Table\ActiveRow;
 class UserRegistrator {
    use Nette\SmartObject;
 
+   /** @var Context */
    private $database;
+
+   /** @var Passwords */
    private $passwords;
 
 
