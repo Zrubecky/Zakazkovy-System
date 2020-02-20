@@ -2,7 +2,7 @@
 
 namespace App\Presenters;
 
-use App\Model\App\Model\TokenVerificationException;
+use App\Model\Exceptions\TokenVerificationException;
 use App\Model\Mailers\PasswordResetMailer;
 use App\Model\User\RegisteredUserDao;
 use App\Model\User\ResetTokenDao;

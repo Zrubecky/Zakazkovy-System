@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Model\User;
 
-use Nette;
-use Nette\security\Passwords;
 use App\Model\Exceptions\PasswordVerificationException;
+use Nette;
+use Nette\Security\Passwords;
 
 /**
  * Handles user password change.

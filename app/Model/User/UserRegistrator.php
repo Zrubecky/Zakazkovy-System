@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Model\User;
 
 use Nette;
-use Nette\database\Table\ActiveRow;
+use Nette\Database\Table\ActiveRow;
 
 /**
  * Handles user registration.

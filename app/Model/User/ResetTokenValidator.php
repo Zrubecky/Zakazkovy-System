@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Model\User;
 
+use App\Model\Exceptions\TokenVerificationException;
 use Nette;
 use Nette\Utils\DateTime;
-use App\Model\Exceptions\TokenVerificationException;
 
 /**
  * Handles reset token validation.

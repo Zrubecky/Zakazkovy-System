@@ -6,7 +6,7 @@ namespace App\Model\Order;
 
 use Nette;
 use Nette\Database\Context;
-use Nette\database\Table\ActiveRow;
+use Nette\Database\Table\ActiveRow;
 
 /**
  * Data access object for orders.
