@@ -2,9 +2,9 @@
 
 namespace App\Presenters;
 
-use App\Model\ConfirmationTokenDao;
-use App\Model\ConfirmationTokenValidator;
-use App\Model\RegisteredUserDao;
+use App\Model\User\ConfirmationTokenDao;
+use App\Model\User\ConfirmationTokenValidator;
+use App\Model\User\RegisteredUserDao;
 use Nette;
 
 /**

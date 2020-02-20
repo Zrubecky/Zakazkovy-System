@@ -31,33 +31,33 @@ session:
 	expiration: 14 days
 
 services:
-	authenticator: App\Model\UserAuthenticator
+	authenticator: App\Model\User\UserAuthenticator
 	router: App\Router\RouterFactory::createRouter
 
 	- Nette\Utils\Random
 	- Nette\Utils\DateTime
 	- Latte\Engine
 	
-	- App\Model\UserRegistrator
-	- App\Model\UserPasswordChanger
-	- App\Model\PasswordVerificationException
-	- App\Model\TokenVerificationException
-	- App\Model\UserPasswordReseter
-	- App\Model\ResetTokenGenerator
-	- App\Model\PasswordResetRequestGenerator
-	- App\Model\ResetTokenValidator
-	- App\Model\RegisteredUserDao
-	- App\Model\ResetTokenDao
-	- App\Model\ConfirmationTokenDao
-	- App\Model\ConfirmationTokenGenerator
-	- App\Model\ConfirmationTokenValidator
-	- App\Model\OrderTypeDao
-	- App\Model\OrderDao
-	- App\Model\AttachmentDao
-	- App\Model\OrderValidator
-	- App\Model\AttachmentStorage(%attachmentsDir%)
+	- App\Model\User\UserRegistrator
+	- App\Model\User\UserPasswordChanger
+	- App\Model\Exceptions\PasswordVerificationException
+	- App\Model\Exceptions\TokenVerificationException
+	- App\Model\User\UserPasswordReseter
+	- App\Model\User\ResetTokenGenerator
+	- App\Model\User\PasswordResetRequestGenerator
+	- App\Model\User\ResetTokenValidator
+	- App\Model\User\RegisteredUserDao
+	- App\Model\User\ResetTokenDao
+	- App\Model\User\ConfirmationTokenDao
+	- App\Model\User\ConfirmationTokenGenerator
+	- App\Model\User\ConfirmationTokenValidator
+	- App\Model\Order\OrderTypeDao
+	- App\Model\Order\OrderDao
+	- App\Model\Order\AttachmentDao
+	- App\Model\Order\OrderValidator
+	- App\Model\Order\AttachmentStorage(%attachmentsDir%)
 
-	- App\Model\BaseMailer(homeAddress: %mailer.username%)
-	- App\Model\OrderMailer(homeAddress: %mailer.username%)
-	- App\Model\PasswordResetMailer(homeAddress: %mailer.username%)
-	- App\Model\ConfirmEmailMailer(homeAddress: %mailer.username%)
+	- App\Model\Mailers\BaseMailer(homeAddress: %mailer.username%)
+	- App\Model\Mailers\OrderMailer(homeAddress: %mailer.username%)
+	- App\Model\Mailers\PasswordResetMailer(homeAddress: %mailer.username%)
+	- App\Model\Mailers\ConfirmEmailMailer(homeAddress: %mailer.username%)

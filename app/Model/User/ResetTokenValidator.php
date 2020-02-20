@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Model\User;
 
 use Nette;
 use Nette\Utils\DateTime;
+use App\Model\Exceptions\TokenVerificationException;
 
 /**
  * Handles reset token validation.

@@ -2,11 +2,11 @@
 
 namespace App\Presenters;
 
-use App\Model\AttachmentStorage;
-use App\Model\OrderDao;
-use App\Model\OrderMailer;
-use App\Model\OrderTypeDao;
-use App\Model\OrderValidator;
+use App\Model\Mailers\OrderMailer;
+use App\Model\Order\AttachmentStorage;
+use App\Model\Order\OrderDao;
+use App\Model\Order\OrderTypeDao;
+use App\Model\Order\OrderValidator;
 use Nette\Application\UI\Form;
 use Nette\Utils\DateTime;
 

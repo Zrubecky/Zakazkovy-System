@@ -3,11 +3,11 @@
 namespace App\Presenters;
 
 use App\Model\App\Model\TokenVerificationException;
-use App\Model\PasswordResetMailer;
-use App\Model\RegisteredUserDao;
-use App\Model\ResetTokenDao;
-use App\Model\ResetTokenValidator;
-use App\Model\UserPasswordReseter;
+use App\Model\Mailers\PasswordResetMailer;
+use App\Model\User\RegisteredUserDao;
+use App\Model\User\ResetTokenDao;
+use App\Model\User\ResetTokenValidator;
+use App\Model\User\UserPasswordReseter;
 use Nette\Application\UI\Form;
 
 /**

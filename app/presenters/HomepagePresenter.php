@@ -2,7 +2,7 @@
 
 namespace App\Presenters;
 
-use App\model\OrderDao;
+use App\Model\Order\OrderDao;
 
 /**
  * Main homepage (user order dashboard.)

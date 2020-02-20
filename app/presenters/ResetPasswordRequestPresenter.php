@@ -2,8 +2,8 @@
 
 namespace App\Presenters;
 
-use App\Model\PasswordResetRequestGenerator;
-use App\Model\RegisteredUserDao;
+use App\Model\User\PasswordResetRequestGenerator;
+use App\Model\User\RegisteredUserDao;
 use Nette\Application\UI\Form;
 
 /**

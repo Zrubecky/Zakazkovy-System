@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Exceptions;
 
 /**
  * Thrown when password verification fails.

@@ -2,8 +2,8 @@
 
 namespace App\Presenters;
 
-use App\Model\PasswordVerificationException;
-use App\Model\UserPasswordChanger;
+use App\Model\Exceptions\PasswordVerificationException;
+use App\Model\User\UserPasswordChanger;
 use Nette\Application\UI\Form;
 
 /**

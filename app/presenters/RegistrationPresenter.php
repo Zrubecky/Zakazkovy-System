@@ -2,10 +2,10 @@
 
 namespace App\Presenters;
 
-use App\Model\ConfirmationTokenGenerator;
-use App\Model\ConfirmEmailMailer;
-use App\Model\RegisteredUserDao;
-use App\Model\UserRegistrator;
+use App\Model\Mailers\ConfirmEmailMailer;
+use App\Model\User\ConfirmationTokenGenerator;
+use App\Model\User\RegisteredUserDao;
+use App\Model\User\UserRegistrator;
 use Nette\Application\UI\Form;
 
 /**

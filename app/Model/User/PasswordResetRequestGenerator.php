@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Model\User;
 
+use App\Model\Mailers\PasswordResetMailer;
 use Nette;
 
 /**
