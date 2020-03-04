@@ -49,8 +49,11 @@ class ConfirmEmailPresenter extends Nette\Application\UI\Presenter
       }
 
       $this->registeredUserDao->updateAccountStatus($user->id, "A");
-      $this->user->identity->account_status = "A";
 
+      if ($this->user->isLoggedIn()) {
+         $this->user->identity->account_status = "A";
+      }
+      
       $this->confirmationTokenDao->deleteToken($confirmationToken);
 
       $this->flashMessage("Email byl úspěšně potvrzen.", "alert-success");
