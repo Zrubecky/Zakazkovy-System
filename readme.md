@@ -17,7 +17,7 @@ composer install
 Dále je nutné vytvořit si databázi. Databáze je připravena ve složce:
 
 ```
-database/
+/database/
 ```
 
 v kořenovém adresáři.
@@ -25,7 +25,7 @@ v kořenovém adresáři.
 Soubor **create_database.sql** obsahuje sql příkaz pro vytvoření databáze s názvem **bm_zakazkovy_system**, jenž je předkonfigurována v souboru:
 
 ```
-app/config/config.neon
+/app/config/config.neon
 ```
 
 Tabulky jsou připravené v souboru **create_tables.sql** i s několika předpřipravenými typy zakázek.
@@ -49,13 +49,20 @@ Pro správný chod aplikace je nutné mailer dokonfigurovat.
 Jako poslední krok je nutné vytvořit lokální konfigurační **config.local.neon** (možné i lokálně nastavit mailer) ve složce:
 
 ```
-app/config/
+/app/config/
 ```
 
 Nebo lokální konfigurační soubor odstranit z nastavení v souboru:
 
 ```
-app/bootstrap.php
+/app/bootstrap.php
+```
+
+stačí odmazat příkaz **->addConfig(__DIR__ . '/config/config.local.neon')** z:
+```
+$configurator
+   ->addConfig(__DIR__ . '/config/config.neon')
+   ->addConfig(__DIR__ . '/config/config.local.neon');
 ```
 
 Poté je aplikace plně funkční.
